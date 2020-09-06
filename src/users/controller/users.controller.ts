@@ -5,7 +5,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../../auth/guard/jwt.auth.guard';
 
-@ApiTags('auth')
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
 
@@ -15,6 +15,12 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get()
   public async getAllUser() {
-     return await this.userService.getAll();
+    return await this.userService.getAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  public async getMe() {
+
   }
 }
