@@ -3,7 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from './shared/models/users/users';
+import { User } from './shared/models/users/users.entity';
+import { AuthModule } from './auth/auth.module';
+import { log } from 'util';
 
 @Module({
   imports: [
@@ -15,13 +17,19 @@ import { Users } from './shared/models/users/users';
         username: 'root',
         password: null,
         database: 'nest_js',
-        entities: [Users],
+        entities: [User],
+        synchronize: true,
+        migrationsRun: true,
+        logging: true,
         migrationsTableName: 'migration_table',
-        migrations: ['migrations/*.ts'],
-        synchronize: true
+        migrations: [
+          __dirname + '/../migrations/*{.ts,.js}'
+        ],
+        charset: 'utf8'
       }
     ),
-    UsersModule
+    UsersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
