@@ -22,22 +22,22 @@ export class User {
   @Column({ type: 'varchar', length: 200, unique: true })
   email: string;
 
-  @Column({ type: 'varchar', length: 40, unique: true })
+  @Column({ type: 'varchar', length: 40, unique: true, name: 'user_name' })
   userName: string;
 
-  @Column({ type: 'boolean', default: true })
+  @Column({ type: 'boolean', default: true, name: 'is_active'})
   isActive: boolean;
 
   @Column({ type: 'varchar', length: 20, select: false })
   password: string;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamp', name: 'create_at' })
   createdAt: string;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamp', name: 'update_at' })
   updatedAt: string;
 
-  @DeleteDateColumn({ type: 'timestamp' })
+  @DeleteDateColumn({ type: 'timestamp', name: 'deleted_at' })
   deletedAt: string;
 
   @BeforeInsert()
